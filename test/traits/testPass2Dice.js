@@ -174,9 +174,9 @@ Test.describe('Pass 2 Dice', _ => {
 		engine.analyizeDicePool(dicePool);
 		Test.assertEquals(pass2Dice.analyze(dicePool), true);
 
-		Test.assertEquals(dicePool.currentScore, 400);
-		Test.assertEquals(dicePool.kept.length, 4, 'kept length');
-		Test.assertEquals(dicePool.rolls.length, 2, 'rolls length');
+		Test.assertEquals(dicePool.currentScore, 450);
+		Test.assertEquals(dicePool.kept.length, 5, 'kept length');
+		Test.assertEquals(dicePool.rolls.length, 1, 'rolls length');
 	});
 
 	Test.it("222231", () => {
@@ -184,9 +184,9 @@ Test.describe('Pass 2 Dice', _ => {
 		engine.analyizeDicePool(dicePool);
 		Test.assertEquals(pass2Dice.analyze(dicePool), true);
 
-		Test.assertEquals(dicePool.currentScore, 400);
-		Test.assertEquals(dicePool.kept.length, 4, 'kept length');
-		Test.assertEquals(dicePool.rolls.length, 2, 'rolls length');
+		Test.assertEquals(dicePool.currentScore, 500);
+		Test.assertEquals(dicePool.kept.length, 5, 'kept length');
+		Test.assertEquals(dicePool.rolls.length, 1, 'rolls length');
 	});
 
 	Test.it("666", () => {
@@ -204,9 +204,9 @@ Test.describe('Pass 2 Dice', _ => {
 		engine.analyizeDicePool(dicePool);
 		Test.assertEquals(pass2Dice.analyze(dicePool), true);
 
-		Test.assertEquals(dicePool.currentScore, 1200);
-		Test.assertEquals(dicePool.kept.length, 4, 'kept length');
-		Test.assertEquals(dicePool.rolls.length, 2, 'rolls length');
+		Test.assertEquals(dicePool.currentScore, 1300);
+		Test.assertEquals(dicePool.kept.length, 5, 'kept length');
+		Test.assertEquals(dicePool.rolls.length, 1, 'rolls length');
 	});
 
 	Test.it("66666", () => {
@@ -238,12 +238,4 @@ Test.describe('Pass 2 Dice', _ => {
 		Test.assertEquals(dicePool.kept.length, 6, 'kept length');
 		Test.assertEquals(dicePool.rolls.length, 0, 'rolls length');
 	});
-
-console.log('*** need to test scenario');
-	// 111554 -
-	// rolled 124663
-	// rolled 12466
-	// rolled 1246
-	// rolled 554
-	// it should have taken both 5s, but it only took one of them
 });

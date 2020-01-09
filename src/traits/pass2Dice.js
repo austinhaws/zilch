@@ -51,6 +51,24 @@ module.exports = {
 		} else {
 			console.error('pass2Dice.analyze(): zilch discovered');
 		}
-		return !!dicePool.rolls.length && dicePool.rolls.length <= 2;
+
+		const willPass = !!dicePool.rolls.length && dicePool.rolls.length <= 2;
+
+		if (willPass) {
+			const checkPointers = (val, score) => {
+				// check if any lingering counters to grab
+				if (dicePool.rolls.includes(val)) {
+					for (let idx = dicePool.rolls.indexOf(val); idx !== -1; idx = dicePool.rolls.indexOf(val)) {
+						dicePool.currentScore += score;
+						dicePool.kept.push(val);
+						dicePool.rolls.splice(idx, 1);
+					}
+				}
+			};
+			checkPointers(1, 100);
+			checkPointers(5, 50);
+		}
+
+		return willPass;
 	},
 };
