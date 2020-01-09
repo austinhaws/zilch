@@ -185,9 +185,7 @@ try
             {
                 if (describing) throw "cannot call describe within another describe";
                 describing = true;
-                if (!globalOptions.hideTitles) {
-					console.log("<DESCRIBE::>" + Test.format(_message(msg)));
-				}
+				console.log("<DESCRIBE::>" + Test.format(_message(msg)));
                 fn();
             }
             finally
