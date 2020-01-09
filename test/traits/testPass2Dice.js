@@ -1,6 +1,6 @@
-const Test = require('../../cw-2')();
-const pass2Dice = require('../traits/pass2Dice');
-const engine = require('../engine');
+const Test = require('../../src/cw-2')();
+const pass2Dice = require('../../src/traits/pass2Dice');
+const engine = require('../../src/engine');
 
 Test.setGlobalOptions({
 	hideSuccess: true,
@@ -239,7 +239,7 @@ Test.describe('Pass 2 Dice', _ => {
 		Test.assertEquals(dicePool.rolls.length, 0, 'rolls length');
 	});
 
-
+console.log('*** need to test scenario');
 	// 111554 -
 	// rolled 124663
 	// rolled 12466

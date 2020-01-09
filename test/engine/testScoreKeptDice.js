@@ -1,5 +1,5 @@
-const Test = require('../../../cw-2')();
-const engine = require('../../engine');
+const Test = require('../../src/cw-2')();
+const engine = require('../../src/engine');
 
 Test.setGlobalOptions({
 	hideSuccess: true,

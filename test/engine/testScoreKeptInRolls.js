@@ -1,24 +1,10 @@
-const Test = require('../../../cw-2')();
-const engine = require('../../engine');
+const Test = require('../../src/cw-2')();
+const engine = require('../../src/engine');
 
 Test.setGlobalOptions({
 	hideSuccess: true,
 	hideTiming: true,
 	hideTitles: true,
-});
-
-const testDicePool = rolls => ({
-	// what has been rolled
-	rolls: rolls.concat([...Array.from({length: 6 - rolls.length}, () => engine.rollDie())]),
-	// for checking for sets: {number: count}
-	rollNumberCounts: undefined,
-	sets: [],
-	// what rolls were kept
-	kept: [],
-	// what the current total is
-	currentScore: 0,
-	// is the last roll a zilch
-	isZilched: false,
 });
 
 Test.describe('kept in rolls', _ => {
