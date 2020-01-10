@@ -7,7 +7,9 @@ module.exports = () => ({
 	totalRolls: 0,
 	// how many zilches did players get
 	numberZilches: 0,
+	timesRoll6Dice: 0,
 
+	averageRoll6Dice: undefined,
 	averageRolls: undefined,
 	averageScores: undefined,
 	// pointer to game/player that had lowest score

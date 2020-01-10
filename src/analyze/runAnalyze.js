@@ -4,7 +4,7 @@ const pass2Dice = require('../traits/pass2Dice');
 const zilch = require('../zilch');
 
 // create players
-const players = [
+const createPlayers = () => [
 	engine.createPlayer({
 		trait: pass2Dice,
 		name: 'player 1',
@@ -26,12 +26,16 @@ const players = [
 		turnOrder: 4,
 	}),
 ];
+const games = [
+	createPlayers(),
+	createPlayers(),
+	createPlayers(),
+	createPlayers(),
+];
+games.forEach(zilch);
 
-zilch(players);
-
-const stats = analyzeGames([players]);
+const stats = analyzeGames(games);
 
 console.log('*** game over ***', JSON.stringify({
-	players,
 	stats,
 }, null, 4));
