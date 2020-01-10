@@ -54,9 +54,13 @@ const engine = {
 		dicePool.isZilched = engine.zilched(dicePool);
 	},
 	scoreSet: set => (set.number === 1 ? 1000 : set.number * 100) * (set.count > 3 ? Math.pow(2, set.count - 3) : 1),
-	createPlayer: (trait, name) => ({
+	createPlayer: ({trait, name, turnOrder}) => ({
 		trait,
 		name,
+		timesRoll6Dice: 0,
+		turnOrder,
+		numberRolls: 0,
+		numberZilches: 0,
 		score: 0,
 		zilchedScore: 0,
 	}),
@@ -102,9 +106,16 @@ const engine = {
 	takeTurn: (players, dicePool) => {
 		let playerPassed = false;
 		while (!playerPassed && !engine.rollDicePool(dicePool)) {
+			if (dicePool.rolls.length === NUMBER_DICE) {
+				players[0].timesRoll6Dice++;
+			}
 // console.log('before analyze', {dicePool, currentPlayer: players[0].name});
 			playerPassed = players[0].trait.analyze(dicePool, players);
+			players[0].numberRolls++;
 // console.log('aft3er analyze', {dicePool, playerPassed});
+		}
+		if (dicePool.isZilched) {
+			players[0].numberZilches++;
 		}
 		players[0][dicePool.isZilched ? 'zilchedScore' : 'score'] += dicePool.currentScore;
 	},
