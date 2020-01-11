@@ -1,7 +1,7 @@
 const engine = require("../engine");
 
-module.exports = {
-	name: 'Pass 2 or less Dice',
+module.exports = passN => ({
+	name: `Pass ${passN} or less Dice`,
 	// current player is players[0]
 	analyze: (dicePool, players) => {
 		// count how many dice are tied up in sets
@@ -53,7 +53,7 @@ module.exports = {
 			console.error('pass2Dice.analyze(): zilch discovered');
 		}
 
-		const willPass = !!dicePool.rolls.length && dicePool.rolls.length <= 2;
+		const willPass = !!dicePool.rolls.length && dicePool.rolls.length <= passN;
 
 		if (willPass) {
 			const checkPointers = (val, score) => {
@@ -72,4 +72,4 @@ module.exports = {
 
 		return willPass;
 	},
-};
+});

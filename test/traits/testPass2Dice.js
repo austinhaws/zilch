@@ -26,7 +26,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("1", () => {
 		const dicePool = testDicePool([1, 6, 5, 2, 3, 4]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 100);
 		Test.assertEquals(dicePool.kept.length, 1);
@@ -35,7 +35,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("11 - keep just one", () => {
 		const dicePool = testDicePool([1, 1, 5, 2, 3, 4]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 100);
 		Test.assertEquals(dicePool.kept.length, 1);
@@ -44,7 +44,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("111", () => {
 		const dicePool = testDicePool([1, 1, 1, 2, 3, 4]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 1000);
 		Test.assertEquals(dicePool.kept.length, 3, 'kept length');
@@ -53,7 +53,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("1111", () => {
 		const dicePool = testDicePool([1, 1, 1, 1, 3, 4]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), true);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), true);
 
 		Test.assertEquals(dicePool.currentScore, 2000);
 		Test.assertEquals(dicePool.kept.length, 4, 'kept length');
@@ -62,7 +62,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("11111", () => {
 		const dicePool = testDicePool([1, 1, 1, 1, 1, 4]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), true);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), true);
 
 		Test.assertEquals(dicePool.currentScore, 4000);
 		Test.assertEquals(dicePool.kept.length, 5, 'kept length');
@@ -71,7 +71,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("111111", () => {
 		const dicePool = testDicePool([1, 1, 1, 1, 1, 1]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 8000);
 		Test.assertEquals(dicePool.kept.length, 6, 'kept length');
@@ -81,7 +81,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("5", () => {
 		const dicePool = testDicePool([6, 6, 5, 2, 3, 4]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 50);
 		Test.assertEquals(dicePool.kept.length, 1, 'kept length');
@@ -91,7 +91,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("55", () => {
 		const dicePool = testDicePool([6, 5, 5, 2, 3, 4]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 50);
 		Test.assertEquals(dicePool.kept.length, 1, 'kept length');
@@ -101,7 +101,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("555", () => {
 		const dicePool = testDicePool([5, 5, 5, 2, 3, 4]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 500);
 		Test.assertEquals(dicePool.kept.length, 3, 'kept length');
@@ -111,7 +111,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("5555", () => {
 		const dicePool = testDicePool([5, 5, 5, 5, 3, 4]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), true);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), true);
 
 		Test.assertEquals(dicePool.currentScore, 1000);
 		Test.assertEquals(dicePool.kept.length, 4, 'kept length');
@@ -121,7 +121,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("55555", () => {
 		const dicePool = testDicePool([5, 5, 5, 5, 5, 4]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), true);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), true);
 
 		Test.assertEquals(dicePool.currentScore, 2000);
 		Test.assertEquals(dicePool.kept.length, 5, 'kept length');
@@ -131,7 +131,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("555555", () => {
 		const dicePool = testDicePool([5, 5, 5, 5, 5, 5]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 4000);
 		Test.assertEquals(dicePool.kept.length, 6, 'kept length');
@@ -142,7 +142,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("222", () => {
 		const dicePool = testDicePool([2, 2, 2, 3, 4, 6]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 200);
 		Test.assertEquals(dicePool.kept.length, 3, 'kept length');
@@ -152,7 +152,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("2225", () => {
 		const dicePool = testDicePool([2, 2, 2, 3, 4, 5]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 50);
 		Test.assertEquals(dicePool.kept.length, 1, 'kept length');
@@ -162,7 +162,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("2221", () => {
 		const dicePool = testDicePool([2, 2, 2, 3, 4, 1]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 100);
 		Test.assertEquals(dicePool.kept.length, 1, 'kept length');
@@ -172,7 +172,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("222235", () => {
 		const dicePool = testDicePool([2, 2, 2, 2, 5, 3]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), true);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), true);
 
 		Test.assertEquals(dicePool.currentScore, 450);
 		Test.assertEquals(dicePool.kept.length, 5, 'kept length');
@@ -182,7 +182,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("222231", () => {
 		const dicePool = testDicePool([2, 2, 2, 2, 1, 3]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), true);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), true);
 
 		Test.assertEquals(dicePool.currentScore, 500);
 		Test.assertEquals(dicePool.kept.length, 5, 'kept length');
@@ -192,7 +192,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("666", () => {
 		const dicePool = testDicePool([6, 6, 6, 2, 1, 3]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 600);
 		Test.assertEquals(dicePool.kept.length, 3, 'kept length');
@@ -202,7 +202,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("6666", () => {
 		const dicePool = testDicePool([6, 6, 6, 6, 1, 3]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), true);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), true);
 
 		Test.assertEquals(dicePool.currentScore, 1300);
 		Test.assertEquals(dicePool.kept.length, 5, 'kept length');
@@ -212,7 +212,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("66666", () => {
 		const dicePool = testDicePool([6, 6, 6, 6, 6, 3]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), true);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), true);
 
 		Test.assertEquals(dicePool.currentScore, 2400);
 		Test.assertEquals(dicePool.kept.length, 5, 'kept length');
@@ -222,7 +222,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("666666", () => {
 		const dicePool = testDicePool([6, 6, 6, 6, 6, 6]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 4800);
 		Test.assertEquals(dicePool.kept.length, 6, 'kept length');
@@ -232,7 +232,7 @@ Test.describe('Pass 2 Dice', _ => {
 	Test.it("153331", () => {
 		const dicePool = testDicePool([1, 5, 3, 3, 3, 1]);
 		engine.analyizeDicePool(dicePool);
-		Test.assertEquals(pass2Dice.analyze(dicePool), false);
+		Test.assertEquals(pass2Dice(2).analyze(dicePool), false);
 
 		Test.assertEquals(dicePool.currentScore, 550);
 		Test.assertEquals(dicePool.kept.length, 6, 'kept length');

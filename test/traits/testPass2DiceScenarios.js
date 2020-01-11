@@ -22,8 +22,8 @@ Test.describe('Pass 2 Dice: Scenarios', _ => {
 		]);
 
 		const players = [
-			engine.createPlayer({trait: pass2Dice, name: 'Test dummy 1', turnOrder: 1}),
-			engine.createPlayer({trait: pass2Dice, name: 'Test dummy 2', turnOrder: 2}),
+			engine.createPlayer({trait: pass2Dice(2), name: 'Test dummy 1', turnOrder: 1}),
+			engine.createPlayer({trait: pass2Dice(2), name: 'Test dummy 2', turnOrder: 2}),
 		];
 
 		const dicePool = engine.createDicePool();

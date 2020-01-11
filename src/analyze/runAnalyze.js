@@ -17,7 +17,15 @@ const MIN_PLAYERS = 2;
 const MAX_PLAYERS = 10;
 const NUMBER_OF_GAMES = 100;
 const games = Array.from({length: NUMBER_OF_GAMES}, () =>
-	createPlayers(Math.floor(Math.random() * (MAX_PLAYERS - MIN_PLAYERS + 1)) + MIN_PLAYERS, [oneRoll, pass2Dice]),
+	createPlayers(Math.floor(Math.random() * (MAX_PLAYERS - MIN_PLAYERS + 1)) + MIN_PLAYERS, [
+		oneRoll,
+		pass2Dice(1),
+		pass2Dice(2),
+		pass2Dice(3),
+		pass2Dice(4),
+		pass2Dice(5),
+		pass2Dice(6),
+	]),
 );
 games.forEach(zilch);
 
