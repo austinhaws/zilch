@@ -9,19 +9,7 @@ Test.setGlobalOptions({
 	hideTitles: true,
 });
 
-const testDicePool = rolls => ({
-	// what has been rolled
-	rolls: rolls.concat([...Array.from({length: 6 - rolls.length}, () => engine.rollDie())]),
-	// for checking for sets: {number: count}
-	rollNumberCounts: undefined,
-	sets: [],
-	// what rolls were kept
-	kept: [],
-	// what the current total is
-	currentScore: 0,
-	// is the last roll a zilch
-	isZilched: false,
-});
+engine.isUnitTest = true;
 
 Test.describe('Pass 2 Dice: Scenarios', _ => {
 
@@ -34,8 +22,8 @@ Test.describe('Pass 2 Dice: Scenarios', _ => {
 		]);
 
 		const players = [
-			engine.createPlayer(pass2Dice, 'Test dummy 1'),
-			engine.createPlayer(pass2Dice, 'Test dummy 2'),
+			engine.createPlayer({trait: pass2Dice, name: 'Test dummy 1', turnOrder: 1}),
+			engine.createPlayer({trait: pass2Dice, name: 'Test dummy 2', turnOrder: 2}),
 		];
 
 		const dicePool = engine.createDicePool();

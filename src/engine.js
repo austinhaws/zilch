@@ -3,6 +3,7 @@ const logger = require('./log');
 
 const NUMBER_DICE = 6;
 const engine = {
+	isUnitTest: false,
 
 	checkKeptInRolls: (kept, rolls) => {
 		const keptDiceCounts = engine.countRollNumbers(kept);
@@ -140,12 +141,14 @@ const engine = {
 		// Player 1 rolled 1 2 4 3 5 2 and kept 1 with current score of 100
 		// Player 1 rolled 2 4 3 3 5 and kept 5 and passed with score of 150
 		// Player 1 rolled 244332 and zilched a score of 400
-		console.log(output.join(''));
-		if (dicePool.isZilched || playerPassed) {
-			console.log(`*** ${dicePool.isZilched ? 'ZILCHED' : 'PASSED'} current score: ${players[0].score + (dicePool.isZilched ? 0 : dicePool.currentScore)}`);
-		}
-		if (dicePool.isZilched) {
-			console.log('');
+		if (!engine.isUnitTest) {
+			console.log(output.join(''));
+			if (dicePool.isZilched || playerPassed) {
+				console.log(`*** ${dicePool.isZilched ? 'ZILCHED' : 'PASSED'} current score: ${players[0].score + (dicePool.isZilched ? 0 : dicePool.currentScore)}`);
+			}
+			if (dicePool.isZilched) {
+				console.log('');
+			}
 		}
 	},
 
