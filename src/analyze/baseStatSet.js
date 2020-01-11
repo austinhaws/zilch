@@ -8,7 +8,10 @@ module.exports = () => ({
 	// how many zilches did players get
 	numberZilches: 0,
 	timesRoll6Dice: 0,
+	// rolled 6 dice and zilched!
+	all6DiceZilch: 0,
 
+	averageAll6DiceZilch: undefined,
 	averageRoll6Dice: undefined,
 	averageRolls: undefined,
 	averageScores: undefined,

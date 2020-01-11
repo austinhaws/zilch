@@ -40,7 +40,7 @@ Test.describe('Pass 2 Dice: Scenarios', _ => {
 
 		const dicePool = engine.createDicePool();
 
-		engine.takeTurn(players, dicePool);
+		engine.takeTurn(players, dicePool, false);
 		Test.assertEquals(players[0].score, 400);
 	});
 });

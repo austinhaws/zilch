@@ -67,8 +67,11 @@ const engine = {
 	hasWinner: players => players.some(player => player.score >= 10000),
 	rollDie: () => Math.floor(Math.random() * 6) + 1,
 
+	createDicePoolDie: () => ({locked: false, value: undefined}),
+
 	createDicePool: () => ({
 		// what has been rolled
+		dice: Array.from({length: 6}, engine.createDicePoolDie),
 		rolls: undefined,
 		// for checking for sets: {number: count}
 		rollNumberCounts: undefined,
@@ -83,12 +86,25 @@ const engine = {
 
 	// returns false if the pool zilched
 	rollDicePool: dicePool => {
-// console.log('before reset', {dicePool});
+		// unlock all dice (will relock with kepts)
+		dicePool.dice.forEach(die => die.locked = false);
+		// clear kepts if rolling all 6 or zilched
+		if (dicePool.isZilched) {
+			dicePool.currentScore = 0;
+		}
+		if (dicePool.kept.length === 6 || dicePool.isZilched) {
+			dicePool.kept = [];
+		}
+// console.log('after reset', {dicePool: JSON.stringify(dicePool, null, 4)});
+
+		// reset dice pool defaults
 		const {rolls, rollNumberCounts, sets, isZilched} = engine.createDicePool();
 		Object.assign(dicePool, {rolls, rollNumberCounts, sets, isZilched});
-// console.log('after reset', {dicePool});
 
-		const diceToRoll = dicePool.isZilched ? NUMBER_DICE : (NUMBER_DICE - dicePool.kept.length);
+		// lock kept dice
+		dicePool.kept.forEach(n => dicePool.dice.filter(die => !die.locked && die.value === n)[0].locked = true);
+// console.log('after reset', {dicePool: JSON.stringify(dicePool, null, 4)});
+		const diceToRoll = dicePool.dice.filter(die => !die.locked).length;
 
 		if (dicePool.isZilched) {
 			dicePool.currentScore = 0;
@@ -96,24 +112,60 @@ const engine = {
 		if (diceToRoll === 6) {
 			dicePool.kept = engine.createDicePool().kept;
 		}
-		dicePool.isZilched = false;
 
-		dicePool.rolls = Array.from({length: diceToRoll}, () => engine.rollDie());
+		// roll unlocked dice
+		dicePool.rolls = dicePool.dice.filter(dice => !dice.locked).map(dice => dice.value = engine.rollDie());
+// console.log('after reset', {dicePool: JSON.stringify(dicePool, null, 4)});
+
 		engine.analyizeDicePool(dicePool);
 		return dicePool.isZilched;
 	},
 
-	takeTurn: (players, dicePool) => {
+	outputTurn: (players, dicePool, rolled, playerPassed) => {
+		const output = [`${players[0].name} rolled ${rolled.join(' ')} and `];
+		if (dicePool.isZilched) {
+			output.push(`zilched a score of ${dicePool.currentScore}`);
+		} else {
+			output.push(`kept ${dicePool.kept.join(' ')} and `);
+			if (playerPassed) {
+				output.push(`passed with `);
+			} else {
+				output.push(`current `);
+			}
+			output.push(`score of ${dicePool.currentScore}`);
+		}
+		// Player 1 rolled 1 2 4 3 5 2 and kept 1 with current score of 100
+		// Player 1 rolled 2 4 3 3 5 and kept 5 and passed with score of 150
+		// Player 1 rolled 244332 and zilched a score of 400
+		console.log(output.join(''));
+		if (dicePool.isZilched || playerPassed) {
+			console.log(`*** ${dicePool.isZilched ? 'ZILCHED' : 'PASSED'} current score: ${players[0].score + (dicePool.isZilched ? 0 : dicePool.currentScore)}`);
+		}
+		if (dicePool.isZilched) {
+			console.log('');
+		}
+	},
+
+	takeTurn: (players, dicePool, showOutput) => {
 		let playerPassed = false;
-		while (!playerPassed && !engine.rollDicePool(dicePool)) {
+		let dicePoolZilched = false;
+		while (!playerPassed && !dicePoolZilched) {
+			players[0].numberRolls++;
+			engine.rollDicePool(dicePool);
+			dicePoolZilched = dicePool.isZilched;
 			if (dicePool.rolls.length === NUMBER_DICE) {
 				players[0].timesRoll6Dice++;
 			}
-// console.log('before analyze', {dicePool, currentPlayer: players[0].name});
-			playerPassed = players[0].trait.analyze(dicePool, players);
-			players[0].numberRolls++;
-// console.log('aft3er analyze', {dicePool, playerPassed});
+			const rolled = [...dicePool.rolls];
+			if (!dicePoolZilched) {
+				playerPassed = players[0].trait.analyze(dicePool, players);
+			}
+			engine.outputTurn(players, dicePool, rolled, playerPassed);
 		}
+if (dicePool.isZilched && dicePool.rolls.length === 6) {
+	console.log('*** full 6 dice zilch!');
+	players[0].all6DiceZilch++;
+}
 		if (dicePool.isZilched) {
 			players[0].numberZilches++;
 		}

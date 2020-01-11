@@ -22,14 +22,14 @@ module.exports = {
 			dicePool.currentScore += (setFor1s.length ? 0 : count1s) * 100;
 			dicePool.currentScore += (setFor5s.length ? 0 : count5s) * 50;
 
-			dicePool.kept = [...dicePool.rolls];
+			dicePool.kept.push(...dicePool.rolls);
 			dicePool.rolls = [];
 
 			// check for triples
 		} else if (dicePool.sets.length > 1) {
 			// two sets!! Way to go!
 			dicePool.currentScore += dicePool.sets.map(engine.scoreSet).reduce((tot, n) => tot + n, 0);
-			dicePool.kept = [...dicePool.rolls];
+			dicePool.kept.push(...dicePool.rolls);
 			dicePool.rolls = [];
 
 		} else if (dicePool.sets.length && ((!count1s && !count5s) || dicePool.sets[0].number !== 2 || dicePool.sets[0].count > 3)) {
