@@ -1,3 +1,5 @@
+const compareIfEquals = require('../util/compareIfEquals');
+
 module.exports = stats => {
 	stats.averageScores = stats.totalScores / stats.totalPlayers;
 	stats.averageRolls = stats.totalRolls / stats.totalPlayers;
@@ -7,4 +9,6 @@ module.exports = stats => {
 
 	// remove this because it clutters the output
 	stats.numberDicePerRoll = 'hidden';
+
+	stats.traitCounts.sort(compareIfEquals((a, b) => b.count - a.count, (a, b) => a.name.localeCompare(b.name)));
 };

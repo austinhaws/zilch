@@ -3,7 +3,7 @@ const scoreSingle = require('./util/scoreSingle');
 const applySet = require('./util/applySet');
 
 module.exports = passN => ({
-	name: '1|5 before sets',
+	name: `1|5 before sets - pass ${passN}`,
 	analyze: (dicePool, players) => {
 		// if 1s or 5s then keep them
 		const count1s = countNs(dicePool, 1);

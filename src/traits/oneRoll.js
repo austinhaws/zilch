@@ -1,5 +1,5 @@
 const engine = require("../engine");
-const scoreSingle = require("util/scoreSingle");
+const scoreSingle = require("./util/scoreSingle");
 
 module.exports = {
 	name: 'Pass after one roll',

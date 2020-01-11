@@ -8,5 +8,14 @@ module.exports = (player, stats) => {
 	stats.timesRoll6Dice += player.timesRoll6Dice;
 	stats.all6DiceZilch += player.all6DiceZilch;
 	stats.numberDicePerRoll.push(...player.numberDicePerRoll);
-	stats.traitCounts[player.trait.name] = (stats.traitCounts[player.trait.name] || 0) + 1;
+
+	const traitCount = stats.traitCounts.find(trait => trait.name === player.trait.name);
+	if (traitCount) {
+		traitCount.count++;
+	} else {
+		stats.traitCounts.push({
+			name: player.trait.name,
+			count: 1,
+		});
+	}
 };

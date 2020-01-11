@@ -4,6 +4,7 @@ const pass2Dice = require('../traits/pass2Dice');
 const oneRoll = require('../traits/oneRoll');
 const zilch = require('../zilch');
 const shuffle = require('../util/shuffle');
+const noSets = require('../traits/noSets');
 
 // create players
 const createPlayers = (count, traits) => Array.from({length: count},
@@ -19,13 +20,10 @@ const MAX_PLAYERS = 10;
 const NUMBER_OF_GAMES = 500;
 const traits = [
 	oneRoll,
-	pass2Dice(1),
-	pass2Dice(2),
-	pass2Dice(3),
-	pass2Dice(4),
-	pass2Dice(5),
-	pass2Dice(6),
+	...(Array.from({length: 6}, (_, i) => pass2Dice(i + 1))),
+	...(Array.from({length: 6}, (_, i) => noSets(i + 1))),
 ];
+console.log(traits.map(traits => traits.name));
 const games = Array.from({length: NUMBER_OF_GAMES}, () =>
 	createPlayers(Math.floor(Math.random() * (MAX_PLAYERS - MIN_PLAYERS + 1)) + MIN_PLAYERS, () => {
 		shuffle(traits);
