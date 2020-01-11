@@ -1,5 +1,4 @@
-const compareIfEquals = require('./compareIfEquals');
-const logger = require('./log');
+const compareIfEquals = require('./util/compareIfEquals');
 
 const NUMBER_DICE = 6;
 const engine = {
