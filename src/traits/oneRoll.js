@@ -10,6 +10,7 @@ const scoreSingle1or5s = (n, nScore, dicePool) => {
 };
 
 module.exports = {
+	name: 'Pass after one roll',
 	// current player is players[0]
 	analyze: (dicePool, players) => {
 		// score sets

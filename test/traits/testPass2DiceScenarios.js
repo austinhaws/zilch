@@ -9,7 +9,7 @@ Test.setGlobalOptions({
 	hideTitles: true,
 });
 
-engine.isUnitTest = true;
+engine.showGameLog = false;
 
 Test.describe('Pass 2 Dice: Scenarios', _ => {
 
