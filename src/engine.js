@@ -55,13 +55,16 @@ const engine = {
 	},
 	scoreSet: set => (set.number === 1 ? 1000 : set.number * 100) * (set.count > 3 ? Math.pow(2, set.count - 3) : 1),
 	createPlayer: ({trait, name, turnOrder}) => ({
-		trait,
 		name,
+		trait,
+		score: 0,
+
+		all6DiceZilch: 0,
+		numberRolls: 0,
+		numberDicePerRoll: [],
+		numberZilches: 0,
 		timesRoll6Dice: 0,
 		turnOrder,
-		numberRolls: 0,
-		numberZilches: 0,
-		score: 0,
 		zilchedScore: 0,
 	}),
 	hasWinner: players => players.some(player => player.score >= 10000),
@@ -156,6 +159,7 @@ const engine = {
 			if (dicePool.rolls.length === NUMBER_DICE) {
 				players[0].timesRoll6Dice++;
 			}
+			players[0].numberDicePerRoll.push(dicePool.rolls.length);
 			const rolled = [...dicePool.rolls];
 			if (!dicePoolZilched) {
 				playerPassed = players[0].trait.analyze(dicePool, players);

@@ -7,4 +7,6 @@ module.exports = (player, stats) => {
 	stats.highest = stats.highest === undefined ? player.score : Math.max(player.score, stats.highest);
 	stats.timesRoll6Dice += player.timesRoll6Dice;
 	stats.all6DiceZilch += player.all6DiceZilch;
+	stats.numberDicePerRoll.push(...player.numberDicePerRoll);
+	stats.traitCounts[player.trait.name] = (stats.traitCounts[player.trait.name] || 0) + 1;
 };

@@ -4,33 +4,18 @@ const pass2Dice = require('../traits/pass2Dice');
 const zilch = require('../zilch');
 
 // create players
-const createPlayers = () => [
-	engine.createPlayer({
-		trait: pass2Dice,
-		name: 'player 1',
-		turnOrder: 1,
-	}),
-	engine.createPlayer({
-		trait: pass2Dice,
-		name: 'player 2',
-		turnOrder: 2,
-	}),
-	engine.createPlayer({
-		trait: pass2Dice,
-		name: 'player 3',
-		turnOrder: 3,
-	}),
-	engine.createPlayer({
-		trait: pass2Dice,
-		name: 'player 4',
-		turnOrder: 4,
-	}),
-];
+const createPlayers = (count, traits) => Array.from({length: count},
+	(_, i) => engine.createPlayer({
+		trait: traits[(i + 1) % traits.length],
+		name: `Player ${i + 1}`,
+		turnOrder: i + 1,
+	}));
+
 const games = [
-	createPlayers(),
-	createPlayers(),
-	createPlayers(),
-	createPlayers(),
+	createPlayers(3, [pass2Dice]),
+	createPlayers(4, [pass2Dice]),
+	createPlayers(5, [pass2Dice]),
+	createPlayers(6, [pass2Dice]),
 ];
 games.forEach(zilch);
 

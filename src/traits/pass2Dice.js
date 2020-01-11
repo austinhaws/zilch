@@ -1,6 +1,7 @@
 const engine = require("../engine");
 
 module.exports = {
+	name: 'Pass 2 or less Dice',
 	// current player is players[0]
 	analyze: (dicePool, players) => {
 		// count how many dice are tied up in sets
