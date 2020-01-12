@@ -11,7 +11,10 @@ module.exports = (stats, games) => {
 	stats.numberDicePerRoll = 'hidden';
 
 	stats.traitCounts.sort(compareIfEquals((a, b) => b.count - a.count, (a, b) => a.name.localeCompare(b.name)));
-	stats.traitCounts.forEach(count => count.percent = count.count / games.length);
+	stats.traitCounts.forEach(count => {
+		count.percent = count.count / games.length;
+		count.scoreAverage = count.scoreSum / count.count;
+	});
 
 	// average rank by trait name
 	stats.averageRankByTrait = {};
@@ -24,6 +27,7 @@ module.exports = (stats, games) => {
 					sumRanks: 0,
 					average: undefined,
 					traitName,
+					sumScore: 0,
 				};
 			}
 			stats.averageRankByTrait[traitName].count += stats.traitRanks[rank][traitName];

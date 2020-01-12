@@ -18,10 +18,12 @@ module.exports = (player, stats) => {
 	const traitCount = stats.traitCounts.find(trait => trait.name === traitName);
 	if (traitCount) {
 		traitCount.count++;
+		traitCount.scoreSum += player.score;
 	} else {
 		stats.traitCounts.push({
 			name: traitName,
 			count: 1,
+			scoreSum: player.score,
 		});
 	}
 };
