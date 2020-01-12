@@ -9,12 +9,18 @@ module.exports = (player, stats) => {
 	stats.all6DiceZilch += player.all6DiceZilch;
 	stats.numberDicePerRoll.push(...player.numberDicePerRoll);
 
-	const traitCount = stats.traitCounts.find(trait => trait.name === player.trait.name);
+	const traitName = player.trait.name;
+	if (!stats.traitRanks[player.rank]) {
+		stats.traitRanks[player.rank] = {};
+	}
+	stats.traitRanks[player.rank][traitName] = (stats.traitRanks[player.rank][traitName] || 0) + 1;
+
+	const traitCount = stats.traitCounts.find(trait => trait.name === traitName);
 	if (traitCount) {
 		traitCount.count++;
 	} else {
 		stats.traitCounts.push({
-			name: player.trait.name,
+			name: traitName,
 			count: 1,
 		});
 	}

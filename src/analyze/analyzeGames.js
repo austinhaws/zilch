@@ -15,7 +15,7 @@ module.exports = games => {
 
 	games.forEach(game => analyzeGame(game, stats));
 
-	Object.keys(stats).forEach(key => finalizeStats(stats[key].stats));
+	Object.keys(stats).forEach(key => finalizeStats(stats[key].stats, games));
 
 	return stats;
 };

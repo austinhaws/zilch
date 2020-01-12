@@ -13,6 +13,7 @@ module.exports = () => ({
 	// how many dice were rolled with each roll
 	numberDicePerRoll: [],
 	traitCounts: [],
+	traitRanks: {},
 
 	averageAll6DiceZilch: undefined,
 	averageNumberDicePerRoll: undefined,
