@@ -17,7 +17,7 @@ const createPlayers = (count, traits) => Array.from({length: count},
 	}));
 
 engine.showGameLog = false;
-const NUMBER_OF_GAMES = 1000;
+const NUMBER_OF_GAMES = 10000;
 const traits = [
 	oneRoll,
 	...(Array.from({length: 6}, (_, i) => pass2Dice(i + 1))),

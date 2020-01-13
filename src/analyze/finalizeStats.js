@@ -10,7 +10,6 @@ module.exports = (stats, games) => {
 	// remove this because it clutters the output
 	stats.numberDicePerRoll = 'hidden';
 
-	stats.traitCounts.sort(compareIfEquals((a, b) => b.count - a.count, (a, b) => a.name.localeCompare(b.name)));
 	stats.traitCounts.forEach(count => {
 		count.percent = count.count / games.length;
 		count.scoreAverage = count.scoreSum / count.count;
@@ -40,4 +39,15 @@ module.exports = (stats, games) => {
 	stats.averageRankByTrait = Object.keys(stats.averageRankByTrait)
 		.map(traitName => stats.averageRankByTrait[traitName])
 		.sort(compareIfEquals((a, b) => a.average - b.average, (a, b) => a.traitName.localeCompare(b.traitName)));
+
+	stats.traitCounts.sort(
+		compareIfEquals((a, b) => b.count - a.count,
+			compareIfEquals((a, b) => b.percent - a.percent,
+				compareIfEquals((a, b) => b.scoreAverage - a.scoreAverage,
+					(a, b) => a.name.localeCompare(b.name)
+				)
+			)
+		)
+	);
+
 };
