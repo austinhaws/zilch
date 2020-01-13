@@ -26,7 +26,10 @@ const traits = [
 	...[100, 300, 350, 500, 1000, 2000].map(threshhold),
 ];
 
-const games = Array.from({length: NUMBER_OF_GAMES}, () => createPlayers(traits.length, i => traits[i]));
+const games = Array.from({length: NUMBER_OF_GAMES}, () => {
+	shuffle(traits);
+	return createPlayers(traits.length, i => traits[i]);
+});
 games.forEach(zilch);
 
 const stats = analyzeGames(games);
